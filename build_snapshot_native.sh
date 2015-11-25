@@ -2,7 +2,7 @@
 
 bindir=`dirname $0`
 
-keyid="03C3951A"
+keyid="${KEYID-03C3951A}"
 
 usage() {
     echo "usage: $0 outdir dist"

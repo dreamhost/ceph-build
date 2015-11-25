@@ -3,6 +3,7 @@
 set -e
 
 bindir=`dirname $0`
+keyid="${KEYID-03C3951A}"
 
 usage() {
     echo "usage: $0 releasedir pbuilddir [dists...]"
@@ -30,9 +31,9 @@ $bindir/release_tarball.sh $releasedir $versionfile
 vers=`cat $versionfile`
 
 $bindir/build_dsc.sh $releasedir $vers 1 $dists
-$bindir/sign_debs.sh $releasedir $vers 03C3951A dsc
+$bindir/sign_debs.sh $releasedir $vers $keyid dsc
 sudo $bindir/build_debs.sh $releasedir $pbuilddir $vers
-$bindir/sign_debs.sh $releasedir $vers 03C3951A changes
+$bindir/sign_debs.sh $releasedir $vers $keyid changes
 
 # probably a better way, but
 rm $versionfile
